@@ -21,6 +21,8 @@
     
     <OrganismsTheFooter />
 
+    <OrganismsLoginForm />
+    
     <div v-if="isModalOpen" class="modal-overlay">
       <div class="modal-content">
         <p>Giriş Yap / Kayıt Ol Modal İçeriği</p>
@@ -71,18 +73,17 @@ const closeModal = () => { isModalOpen.value = false; };
   margin: 20px auto;
   padding: 0 20px;
   width: 100%;
-  min-height: 80vh; 
 }
 
 /* KRİTİK DÜZELTME: TURUNCU BAŞLIK VE ALT ÇİZGİ */
 .section-title {
   font-size: 24px;
   font-weight: 700;
-  color: #f27a1a; /* Turuncu Başlık Rengi */
+  color: #f27a1a;
   margin-bottom: 20px;
-  display: inline-block; /* Çizginin sadece metin kadar olması için */
-  position: relative; /* Çizgiyi konumlandırmak için */
-  padding-bottom: 5px; /* Çizgi için boşluk */
+  display: inline-block; 
+  position: relative; 
+  padding-bottom: 5px; 
 }
 
 /* ALTINDAKİ TURUNCU ÇİZGİ */
@@ -127,4 +128,4 @@ const closeModal = () => { isModalOpen.value = false; };
   border-radius: 8px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
-</style>
+</style> 
