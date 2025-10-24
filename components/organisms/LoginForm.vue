@@ -1,7 +1,9 @@
 <template>
   <div class="auth-card">
     
-    <p class="auth-header-text">Merhaba, <br> Trendyol'a giriş yap veya hesap oluştur, indirimleri kaçırma!</p>
+    <p v-if="currentTab === 'login'" class="auth-header-text">
+      Merhaba, <br> Trendyol'a giriş yap veya hesap oluştur, indirimleri kaçırma!
+    </p>
     
     <AuthTabSelector v-model:activeTab="currentTab" />
     
@@ -20,7 +22,7 @@
 
       <p class="forgot-password" @click="console.log('Şifremi unuttum')">Şifremi Unuttum</p>
       
-      <BaseButton variant="primary" class="main-button">GİRİŞ YAP</BaseBUTTON>
+      <BaseButton variant="primary" class="main-button">GİRİŞ YAP</BaseButton>
 
       <div class="social-buttons-container">
         <BaseButton variant="facebook" class="social-button">
@@ -35,17 +37,18 @@
     </div>
 
     <div v-else class="form-area">
-      <p>Üye Ol Formu Buraya Gelecek</p>
+      <SignUpForm />
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
 import { ref } from 'vue';
-// Component'lerin yollarını kendi projenizdeki gibi varsayıyorum:
+// Component'lerin var olduğundan emin olun
 import BaseInput from '@/components/atoms/BaseInput.vue'; 
 import BaseButton from '@/components/atoms/BaseButton.vue';
 import AuthTabSelector from '@/components/molecules/AuthTabSelector.vue'; 
+import SignUpForm from '@/components/organisms/SignUpForm.vue'; 
 
 const currentTab = ref<'login' | 'register'>('login');
 const email = ref<string>('');
@@ -65,6 +68,7 @@ const password = ref<string>('');
   font-family: Arial, sans-serif;
 }
 .auth-header-text {
+  /* Burası sabittir */
   font-size: 18px;
   text-align: center;
   margin-bottom: 20px;
@@ -90,11 +94,17 @@ const password = ref<string>('');
   transform: translateY(-50%);
   cursor: pointer;
 }
+/* *** GÖZ İKONU BOYUT FİX'İ BURADA *** */
 .password-toggle img {
-    height: 15px;
-    width: auto;
+    height: 15px !important; 
+    width: 15px !important;
+    max-width: 15px;
+    max-height: 15px;
+    display: block; 
     opacity: 0.6;
 }
+/* *** FİX BİTİŞİ *** */
+
 .forgot-password {
   text-align: right;
   font-size: 13px;
