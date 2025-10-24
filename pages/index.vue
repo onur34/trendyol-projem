@@ -1,58 +1,130 @@
 <template>
-  <OrganismsTheHeader /> 
+  <div class="home-page">
+    
+    <OrganismsTheHeader />
 
-  <main class="product-list-container">
-    <h1>Trendyol Klonu: Ürün Listesi</h1>
+    <main class="main-content">
+      
+      <section class="product-list-section">
+        <h2 class="section-title">Önerilen Ürünler</h2> 
+        
+        <div class="product-card-container">
+          <OrganismsProductCard 
+            v-for="product in productList" 
+            :key="product.id"
+            :product="product"
+          />
+        </div>
+      </section>
 
-    <div class="product-grid">
-        <OrganismsProductCard 
-          v-for="p in productList" 
-          :key="p.id" 
-          :product="p" 
-        />
+    </main>
+    
+    <OrganismsTheFooter />
+
+    <div v-if="isModalOpen" class="modal-overlay">
+      <div class="modal-content">
+        <p>Giriş Yap / Kayıt Ol Modal İçeriği</p>
+        <button @click="closeModal">Kapat</button>
+      </div>
     </div>
-  </main>
+  </div>
 </template>
 
 <script setup lang="ts">
 import { ref } from 'vue';
 
-// TS KURALI
+// TS Arayüzü: Ürün Verisinin Yapısı
 interface Product {
   id: number;
   name: string;
   brand: string;
   price: number;
-  imageUrl: string;
-  reviewCount: number;
   oldPrice?: number;
   discountRate?: number;
+  reviewCount: number;
+  imageUrl: string; 
 }
 
-// TEST VERİSİ (LÜTFEN uzantıyı DÜZELTİN: .jpg, .png veya .jpeg)
+// MOCK (Test) Verisi
 const productList = ref<Product[]>([
-  { 
-    id: 1, name: "Apple AirPods (3. nesil)", brand: "Apple", price: 8895.00, oldPrice: 10401.55, discountRate: 14, reviewCount: 9585,
-    imageUrl: "/urun-2.jpg" // BURAYI KENDİ UZANTINIZLA DÜZELTİN!
-  }, 
-  { 
-    id: 2, name: "iPhone 17 Pro Max Silikon Kılıf", brand: "MagSafe Özellikli", price: 2519.06, reviewCount: 3,
-    imageUrl: "/urun-1.jpg" // BURAYI KENDİ UZANTINIZLA DÜZELTİN!
-  }, 
-  { 
-    id: 3, name: "Apple Airtag (1 Pack)", brand: "Apple", price: 1959.00, oldPrice: 2000.00, discountRate: 2, reviewCount: 3185,
-    imageUrl: "/urun-3.jpg" // BURAYI KENDİ UZANTINIZLA DÜZELTİN!
-  }, 
+  { id: 1, name: "Apple AirPods 3. Nesil", brand: "Apple", price: 8895.00, oldPrice: 10401.55, discountRate: 14, reviewCount: 9585, imageUrl: "/products/urun-2.jpg" }, 
+  { id: 2, name: "iPhone 17 Pro Max Silikon Kılıf", brand: "MagSafe Özellikli", price: 2519.06, reviewCount: 3, imageUrl: "/products/urun-1.jpg" }, 
+  { id: 3, name: "Apple Airtag (1 Pack)", brand: "Apple", price: 1959.00, oldPrice: 2000.00, discountRate: 2, reviewCount: 3185, imageUrl: "/products/urun-3.jpg" }, 
 ]);
+
+// MODAL YÖNETİMİ
+const isModalOpen = ref(false);
+const closeModal = () => { isModalOpen.value = false; };
 </script>
 
 <style scoped>
-.product-list-container { padding: 40px; text-align: center; }
-.product-grid {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 15px;
-    margin-top: 20px;
+/* Genel Düzen */
+.home-page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.main-content {
+  flex-grow: 1; 
+  max-width: 1280px;
+  margin: 20px auto;
+  padding: 0 20px;
+  width: 100%;
+  min-height: 80vh; 
+}
+
+/* KRİTİK DÜZELTME: TURUNCU BAŞLIK VE ALT ÇİZGİ */
+.section-title {
+  font-size: 24px;
+  font-weight: 700;
+  color: #f27a1a; /* Turuncu Başlık Rengi */
+  margin-bottom: 20px;
+  display: inline-block; /* Çizginin sadece metin kadar olması için */
+  position: relative; /* Çizgiyi konumlandırmak için */
+  padding-bottom: 5px; /* Çizgi için boşluk */
+}
+
+/* ALTINDAKİ TURUNCU ÇİZGİ */
+.section-title::after {
+  content: "";
+  display: block;
+  width: 100%;
+  height: 3px;
+  background-color: #f27a1a;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+}
+
+/* Ürün Kartları Bölümü */
+.product-list-section {
+    padding-top: 20px;
+}
+.product-card-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px; 
+  justify-content: flex-start;
+}
+
+/* Modal Stilleri */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+.modal-content {
+  background: white;
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 </style>
