@@ -3,26 +3,15 @@
     
     <OrganismsTheHeader />
 
-    <main class="main-content">
-      
-      <section class="product-list-section">
-        <h2 class="section-title">Önerilen Ürünler</h2> 
-        
-        <div class="product-card-container">
-          <OrganismsProductCard 
-            v-for="product in productList" 
-            :key="product.id"
-            :product="product"
-          />
-        </div>
-      </section>
-
-    </main>
-    
     <OrganismsTheFooter />
 
     <OrganismsLoginForm />
     
+    <main class="main-content">
+      </main>
+    
+    <OrganismsProductDetail />
+
     <div v-if="isModalOpen" class="modal-overlay">
       <div class="modal-content">
         <p>Giriş Yap / Kayıt Ol Modal İçeriği</p>
@@ -35,7 +24,8 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 
-// TS Arayüzü: Ürün Verisinin Yapısı
+// SCRIPT KISMINDAKİ productList VE PRODUCT INTERFACE'İ KORUNUYOR
+// Çünkü ProductDetail (7. Öge) ve diğer componentlerinizde bu yapıya ihtiyaç duyabilirsiniz.
 interface Product {
   id: number;
   name: string;
@@ -67,6 +57,7 @@ const closeModal = () => { isModalOpen.value = false; };
   flex-direction: column;
 }
 
+/* MAIN CONTENT STİLİ KORUNUYOR */
 .main-content {
   flex-grow: 1; 
   max-width: 1280px;
@@ -75,41 +66,12 @@ const closeModal = () => { isModalOpen.value = false; };
   width: 100%;
 }
 
-/* KRİTİK DÜZELTME: TURUNCU BAŞLIK VE ALT ÇİZGİ */
-.section-title {
-  font-size: 24px;
-  font-weight: 700;
-  color: #f27a1a;
-  margin-bottom: 20px;
-  display: inline-block; 
-  position: relative; 
-  padding-bottom: 5px; 
+/* Ürün Listesi STİLLERİ ARTIK GEREKSİZ AMA KODDA KALSIN */
+.section-title, .product-list-section, .product-card-container {
+    /* Bu stiller artık DOM'da kullanılmıyor ama kalsın */
 }
 
-/* ALTINDAKİ TURUNCU ÇİZGİ */
-.section-title::after {
-  content: "";
-  display: block;
-  width: 100%;
-  height: 3px;
-  background-color: #f27a1a;
-  position: absolute;
-  bottom: 0;
-  left: 0;
-}
-
-/* Ürün Kartları Bölümü */
-.product-list-section {
-    padding-top: 20px;
-}
-.product-card-container {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px; 
-  justify-content: flex-start;
-}
-
-/* Modal Stilleri */
+/* Modal Stilleri (Aynı) */
 .modal-overlay {
   position: fixed;
   top: 0;
