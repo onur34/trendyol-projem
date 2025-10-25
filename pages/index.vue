@@ -21,7 +21,16 @@
       </div>
     </div>
   </div>
-</template>
+
+  <OrganismsShoppingCart />
+
+    <OrganismsPromoSlider />
+
+    <div v-if="isModalOpen" class="modal-overlay">
+    </div>
+
+
+</template> 
 
 <script setup lang="ts">
 import { ref } from 'vue';
