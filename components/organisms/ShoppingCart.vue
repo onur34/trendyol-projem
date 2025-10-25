@@ -58,7 +58,6 @@
                 </div>
             </div>
           </div>
-          <div class="sale-badge-bottom">Son 3 Ürün!</div>
         </div>
 
       </div>
@@ -299,17 +298,7 @@ const itemQuantity = ref(1); // QuantitySelector için v-model state'i
 }
 
 /* Alt Kısım Rozeti */
-.sale-badge-bottom {
-    background-color: #f00;
-    color: white;
-    font-size: 11px;
-    font-weight: 600;
-    padding: 3px 8px;
-    border-radius: 0 0 0 8px;
-    position: absolute;
-    bottom: 0;
-    left: 0;
-}
+
 
 
 /* 2. Sağ Alan (Summary) */
@@ -378,4 +367,4 @@ const itemQuantity = ref(1); // QuantitySelector için v-model state'i
     font-weight: 400;
     opacity: 0.8;
 }
-</style> 
+</style>  

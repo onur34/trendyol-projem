@@ -30,6 +30,8 @@
 
     <MoleculesAuthActionGroup class="auth-group-position" /> 
     
+    <OrganismsCampaignList /> 
+    
     <div v-if="isModalOpen" class="modal-overlay">
       <div class="modal-content">
         <p>Giriş Yap / Kayıt Ol Modal İçeriği</p>
