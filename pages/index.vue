@@ -12,6 +12,8 @@
     
     <OrganismsProductDetail />
 
+    <OrganismsShoppingCart />
+
     <div v-if="isModalOpen" class="modal-overlay">
       <div class="modal-content">
         <p>Giriş Yap / Kayıt Ol Modal İçeriği</p>
@@ -24,8 +26,7 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 
-// SCRIPT KISMINDAKİ productList VE PRODUCT INTERFACE'İ KORUNUYOR
-// Çünkü ProductDetail (7. Öge) ve diğer componentlerinizde bu yapıya ihtiyaç duyabilirsiniz.
+// TS Arayüzü: Ürün Verisinin Yapısı
 interface Product {
   id: number;
   name: string;
@@ -57,7 +58,6 @@ const closeModal = () => { isModalOpen.value = false; };
   flex-direction: column;
 }
 
-/* MAIN CONTENT STİLİ KORUNUYOR */
 .main-content {
   flex-grow: 1; 
   max-width: 1280px;
@@ -66,12 +66,7 @@ const closeModal = () => { isModalOpen.value = false; };
   width: 100%;
 }
 
-/* Ürün Listesi STİLLERİ ARTIK GEREKSİZ AMA KODDA KALSIN */
-.section-title, .product-list-section, .product-card-container {
-    /* Bu stiller artık DOM'da kullanılmıyor ama kalsın */
-}
-
-/* Modal Stilleri (Aynı) */
+/* Modal Stilleri */
 .modal-overlay {
   position: fixed;
   top: 0;

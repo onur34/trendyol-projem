@@ -6,7 +6,7 @@
       <img 
         v-for="n in 5" 
         :key="n" 
-        src="/urun/star.jpeg" 
+        src="/urun/star.jpg" 
         alt="Yıldız" 
         class="star-icon"
       />
