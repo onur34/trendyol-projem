@@ -5,13 +5,17 @@
       Şimdi Al
     </BaseButton>
 
-    <BaseButton variant="primary" class="add-to-cart-button">
+    <BaseButton 
+      variant="primary" 
+      class="add-to-cart-button" 
+      @click="emit('addToCart')"
+    >
       <img src="/urun/sepet.jpg" alt="Sepet" class="button-icon" />
       Sepete Ekle
       <span class="stock-badge">Son 3 Ürün</span>
     </BaseButton>
     
-    <button class="favorite-button" @click="$emit('toggleFavorite')">
+    <button class="favorite-button" @click="emit('toggleFavorite')">
       <img src="/urun/kalp.jpeg" alt="Favori" class="heart-icon" />
     </button>
   </div>
@@ -19,7 +23,9 @@
 
 <script setup lang="ts">
 import BaseButton from '@/components/atoms/BaseButton.vue';
-defineEmits(['toggleFavorite']);
+
+// Buradaki 'addToCart' ifadesi, ProductDetail.vue dosyasındaki @add-to-cart ile haberleşir
+const emit = defineEmits(['toggleFavorite', 'addToCart']);
 </script>
 
 <style scoped>
@@ -48,7 +54,8 @@ defineEmits(['toggleFavorite']);
     align-items: center;
     justify-content: center;
     position: relative;
-    padding-right: 50px; /* Rozet için boşluk */
+    padding-right: 50px;
+    cursor: pointer;
 }
 .button-icon {
     width: 20px;
@@ -85,4 +92,4 @@ defineEmits(['toggleFavorite']);
     width: 24px;
     height: 24px;
 }
-</style> 
+</style>

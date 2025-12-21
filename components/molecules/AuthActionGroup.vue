@@ -6,11 +6,19 @@
       <span>Giriş Yap</span>
     </div>
 
-    <BaseButton variant="primary" class="big-action-button login-button">
+    <BaseButton 
+      variant="primary" 
+      class="big-action-button login-button"
+      @click="gitLogin"
+    >
       Giriş Yap
     </BaseButton>
 
-    <BaseButton variant="secondary" class="big-action-button register-button">
+    <BaseButton 
+      variant="secondary" 
+      class="big-action-button register-button"
+      @click="gitRegister"
+    >
       Üye Ol
     </BaseButton>
     
@@ -18,11 +26,24 @@
 </template>
 
 <script setup lang="ts">
-// BaseButton'ın components/atoms/BaseButton.vue içinde olduğunu varsayıyoruz
 import BaseButton from '@/components/atoms/BaseButton.vue';
+import { useRouter } from 'vue-router'; // Yönlendirme için
+
+const router = useRouter();
+
+const gitLogin = () => {
+  // Login sayfasına gönder
+  router.push('/login'); 
+};
+
+const gitRegister = () => {
+  // Üye ol sayfasına gönder
+  router.push('/register'); 
+};
 </script>
 
 <style scoped>
+/* CSS kısımların aynen kalıyor, dokunmana gerek yok */
 .auth-action-group {
     width: 250px;
     padding: 15px;
@@ -39,7 +60,7 @@ import BaseButton from '@/components/atoms/BaseButton.vue';
     border-bottom: 1px solid #eee;
     font-size: 18px;
     font-weight: 600;
-    color: #ff6000; /* Turuncu metin */
+    color: #ff6000;
 }
 .user-icon {
     width: 24px;
@@ -52,9 +73,12 @@ import BaseButton from '@/components/atoms/BaseButton.vue';
     font-weight: 700;
     margin-bottom: 10px;
     border-radius: 6px;
+    cursor: pointer;
 }
 .login-button {
     background-color: #ff6000;
+    color: white;
+    border: none;
 }
 .register-button {
     background-color: white;

@@ -2,14 +2,26 @@
   <header class="trendyol-header">
     <div class="top-bar-container">
       <div class="top-bar">
-        <AtomsAppLogo /> 
+        
+        <NuxtLink to="/" class="logo-link">
+          <AtomsAppLogo /> 
+        </NuxtLink>
         
         <MoleculesSearchInput />
         
         <nav class="icon-nav">
-          <AtomsAppIconButton>Giriş Yap</AtomsAppIconButton>
-          <AtomsAppIconButton>Favorilerim</AtomsAppIconButton>
-          <AtomsAppIconButton>Sepetim</AtomsAppIconButton>
+          <NuxtLink to="/login" class="nav-item">
+            <AtomsAppIconButton>Giriş Yap</AtomsAppIconButton>
+          </NuxtLink>
+
+          <NuxtLink to="/favorites" class="nav-item">
+            <AtomsAppIconButton>Favorilerim</AtomsAppIconButton>
+          </NuxtLink>
+
+          <NuxtLink to="/cart" class="nav-item cart-wrapper">
+             <AtomsAppIconButton>Sepetim</AtomsAppIconButton>
+             <span class="basket-count">1</span>
+          </NuxtLink>
         </nav>
       </div>
     </div>
@@ -34,22 +46,20 @@
 </template>
 
 <script setup lang="ts">
-// Atom ve Molekül Componentleri otomatik olarak çağrılır.
-// TS kuralı için boş olsa bile lang="ts" etiketini kullanıyoruz.
+// Atom ve Molekül Componentleri otomatik çağrılır.
 </script>
 
 <style scoped>
-/* PAYLAŞTIĞINIZ GÖRÜNTÜYE BİREBİR UYGUN CSS KODLARI */
 .trendyol-header {
   width: 100%;
   background-color: #fff;
-  border-bottom: 1px solid #f0f0f0; /* Alt kısımda ince gri çizgi */
+  border-bottom: 1px solid #f0f0f0;
 }
 
-/* --- ÜST BAR (LOGO, ARAMA, İKONLAR) --- */
+/* --- ÜST BAR --- */
 .top-bar-container {
     padding: 10px 0;
-    border-bottom: 1px solid #f0f0f0; /* Kategori barı ile aradaki çizgi */
+    border-bottom: 1px solid #f0f0f0;
 }
 .top-bar {
     display: flex;
@@ -57,17 +67,14 @@
     max-width: 1280px;
     margin: 0 auto;
     padding: 0 20px;
-    gap: 30px; /* Logo ve arama çubuğu arasındaki boşluk */
+    gap: 30px;
 }
 
-/* Arama Alanı Kapsayıcısı (Molekül) */
-.search-area {
-    flex-grow: 1; /* Arama çubuğunun geniş alana yayılması */
-    max-width: 600px;
-    height: 40px; /* Kutunun yüksekliğini ayarlama */
-    background-color: #f7f7f7; /* Hafif gri arka plan */
-    border-radius: 4px;
-    display: flex; /* Moleküldeki input ve butonu hizalamak için */
+/* Logo Link Ayarı (Çizgiyi kaldır) */
+.logo-link {
+    text-decoration: none;
+    display: flex;
+    align-items: center;
 }
 
 /* İkonlar Bölümü */
@@ -75,12 +82,40 @@
     display: flex;
     gap: 20px;
     align-items: center;
-    white-space: nowrap; /* İkon yazılarının alt alta inmesini engeller */
+    white-space: nowrap;
 }
 
-/* --- KATEGORİ BAR (ALT BAR) --- */
+/* Linklerin varsayılan mavi rengini ve alt çizgisini kaldırıyoruz */
+.nav-item {
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    align-items: center;
+}
+
+/* Sepet Sayacı İçin Stil (Turuncu Yuvarlak) */
+.cart-wrapper {
+    position: relative;
+}
+.basket-count {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background-color: #f27a1a;
+    color: white;
+    font-size: 10px;
+    font-weight: bold;
+    width: 16px;
+    height: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+}
+
+/* --- KATEGORİ BAR --- */
 .category-bar-container {
-    padding: 0 0 10px 0; /* Alt kısımda hafif boşluk bırakır */
+    padding: 0 0 10px 0;
 }
 .category-bar {
     display: flex;
@@ -88,7 +123,7 @@
     max-width: 1280px;
     margin: 0 auto;
     padding: 0 20px;
-    gap: 20px; /* Kategori linkleri arasındaki boşluk */
+    gap: 20px;
     font-size: 13px;
     font-weight: 500;
 }
@@ -109,15 +144,15 @@
     cursor: pointer;
 }
 
-/* Yeni Rozet Stili */
+/* Rozetler */
 .new-badge {
-    background-color: #f27a1a; /* Turuncu (TÜM KATEGORİLER için) */
+    background-color: #f27a1a;
     color: white;
     font-size: 10px;
     padding: 2px 4px;
     border-radius: 3px;
 }
 .new-badge.red {
-    background-color: #d90000; /* Kırmızı (Çok Satanlar, Flaş Ürünler için) */
+    background-color: #d90000;
 }
 </style>
